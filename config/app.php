@@ -211,4 +211,6 @@ return [
 
     ],
 
+    'reward_values' => env('REWARD_VALUES', [5, 10, 15, 20, 25, 50]),
+
 ];

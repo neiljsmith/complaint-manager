@@ -8,7 +8,25 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+// Theme
+@import "bootswatch";
+
+nav.navbar {
+  margin-bottom: 25px;
+}
+
+.alert {
+  position: absolute;
+  width: 100%;
+  z-index: 100;
+}
+
+.page-item .page-link {
+  font-family: $font-family-alt;
+}
+
+.form-group.form-inline {
+  select {
+    margin: 0 10px;
+  }
 }
