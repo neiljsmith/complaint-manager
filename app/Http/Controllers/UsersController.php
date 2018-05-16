@@ -17,6 +17,7 @@ class UsersController extends Controller
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['test']]);
+        $this->middleware('checkRoles:'. Role::ROLE_SUPER_ADMIN . ',' . Role::ROLE_LINE_MANAGER);
     }
 
     /**
@@ -136,7 +137,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Update user and redirect to user index
+     * Update user and redirect to users index
      *
      * @param UserCreateUpdate $request
      * @param User $user
@@ -212,10 +213,5 @@ class UsersController extends Controller
         return User::where('id', '!=', $id)
             ->where('email', strtolower(trim($email)))
             ->count();
-    }
-
-    public function test(User $user)
-    {
-        User::sendWelcomeEmail($user);
     }
 }

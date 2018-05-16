@@ -30,15 +30,13 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function authorizeRoles($roles)
+    public function hasRole($roles)
     {
         // Make sure we're dealing with an array if $roles is a scalar
         $rolesArray = is_array($roles) ? $roles : [$roles];
 
-        // Check if
-        if (!$this->roles()->whereIn('name', $rolesArray)->exists()) {
-            //abort(401, 'This action is unauthorized.');
-            return redirect('/')->with('status', 'You are not authorized!');
+        if ($this->roles()->whereIn('name', $rolesArray)->exists()) {
+            return true;
         }
     }
 

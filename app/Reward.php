@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reward extends Model
 {
+    /**
+     * Gets unused voucher data and formats it to display
+     * in a table
+     *
+     * @return array
+     */
     public static function stockReport()
     {
         $rawData = \DB::table('rewards')

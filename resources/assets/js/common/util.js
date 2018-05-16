@@ -1,3 +1,7 @@
+/**
+ * Useful, common functions 
+ */
+
 export function elVal(selector) {
     return document.querySelector(selector).value;
 }  

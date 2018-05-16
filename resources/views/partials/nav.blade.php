@@ -5,21 +5,36 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
+
             @auth
+
             <li class="nav-item">
                 <a class="nav-link" href="/">Home</a>
             </li>
+
+                @if (\Auth::user()->hasRole([App\Role::ROLE_SUPER_ADMIN]))
+
             <li class="nav-item">
                 <a class="nav-link" href="/reports">Reports</a>
             </li>
+
+                @endif
+
+                @if (\Auth::user()->hasRole([App\Role::ROLE_SUPER_ADMIN, App\Role::ROLE_LINE_MANAGER]))
             <li class="nav-item">
                 <a class="nav-link" href="/users">Users</a>
             </li>
+
+                @endif
+
             @else
+
             <li class="nav-item">
                 <a class="nav-link" href="/login">Login</a>
             </li>
+
             @endauth
+
         </ul>
         @auth
         <ul class="navbar-nav ml-auto">

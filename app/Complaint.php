@@ -64,17 +64,17 @@ class Complaint extends Model
      */
     public static function findByCustomerSearch($searchField, $searchData)
     {
-        $data = Customer::with(['complaints' => function($query) {
+        $customer = Customer::with(['complaints' => function($query) {
             $query->with('reward')->orderBy('created_at', 'desc');
         }])->where($searchField, $searchData)->first();
 
-        if ($data) {
-            foreach ($data->complaints as $complaint) {
+        if ($customer) {
+            foreach ($customer->complaints as $complaint) {
                 $complaint->created_at_diff = $complaint->created_at->diffForHumans();
                 $complaint->description = substr($complaint->description, 0, 50) . '...';
             }
 
-            return $data;
+            return $customer;
         }    
     }
 

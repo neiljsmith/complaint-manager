@@ -35,6 +35,7 @@ class ComplaintsController extends Controller
      */
     public function create(Request $request, Customer $customer)
     {
+        // Required for creating a reward
         $rewardValues = config('app.reward_values');
         $rewardProviders = RewardProvider::all();
 
@@ -87,6 +88,13 @@ class ComplaintsController extends Controller
         return view('complaints.show', compact('complaint'));
     }
 
+    /**
+     * Returns data to AJAX call from user search form,
+     * looking for either user's 'account_number' or 'email'
+     *
+     * @param string $searchData
+     * @return void
+     */
     public function findByCustomerAccOrEmail($searchData)
     {
         if (is_numeric($searchData)) {
@@ -100,6 +108,14 @@ class ComplaintsController extends Controller
         }
     }   
     
+    /**
+     * Responds to AJAX call from complaint detail page
+     * to add a note to the complaint.
+     *
+     * @param Request $request
+     * @param Complaint $complaint
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function addNote(Request $request, Complaint $complaint)
     {
         $request->validate(['content' => 'required|min:2']);

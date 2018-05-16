@@ -1,6 +1,9 @@
 import axios from 'axios';
 import { size } from 'lodash';
 
+/**
+ * Used for form validation
+ */
 class Validator {
 
     constructor() {

@@ -1,12 +1,9 @@
 <?php
 
-/**
- * 
- */
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\roleIdHasSubordinates;
+use App\Rules\RoleIdHasSubordinates;
 use App\Rules\LineManagerUserId;
 
 class UserCreateUpdate extends FormRequest
