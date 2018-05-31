@@ -104,7 +104,7 @@ class ComplaintsController extends Controller
         }
 
         if (isset($searchField)) {
-            return Complaint::findByCustomerSearch($searchField, $searchData);
+            return Customer::findBySearchTerm($searchField, $searchData);
         }
     }   
     

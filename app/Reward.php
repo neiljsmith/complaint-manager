@@ -21,14 +21,18 @@ class Reward extends Model
             ->groupBy('reward_provider_id', 'value')
             ->get();
 
-        // Format the data into something we can use to populate a display table
+        return $this->formatStockReportForTable($rawData);
+    }
+
+    private function formatStockReportForTable($rawData)
+    {
         $tableData = [
-                'totals' => [
-                    'grandTotalNumber' => 0,
-                    'grandTotalValue' => 0,
-                ],
-                'types' => [],
-            ];
+            'totals' => [
+                'grandTotalNumber' => 0,
+                'grandTotalValue' => 0,
+            ],
+            'types' => [],
+        ];
 
         $valuesArray = array_fill_keys(config('app.reward_values'), 0);
 

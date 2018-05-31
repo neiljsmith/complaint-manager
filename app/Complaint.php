@@ -55,29 +55,6 @@ class Complaint extends Model
             ->paginate($itemsPerPage);
     }
 
-    /**
-     * Finds a customer and their complaints with reward data from search criteria
-     *
-     * @param string $searchField
-     * @param string $searchData
-     * @return Customer
-     */
-    public static function findByCustomerSearch($searchField, $searchData)
-    {
-        $customer = Customer::with(['complaints' => function($query) {
-            $query->with('reward')->orderBy('created_at', 'desc');
-        }])->where($searchField, $searchData)->first();
-
-        if ($customer) {
-            foreach ($customer->complaints as $complaint) {
-                $complaint->created_at_diff = $complaint->created_at->diffForHumans();
-                $complaint->description = substr($complaint->description, 0, 50) . '...';
-            }
-
-            return $customer;
-        }    
-    }
-
     public function customer()
     {
         return $this->belongsTo(Customer::class);
