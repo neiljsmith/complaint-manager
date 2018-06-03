@@ -21,10 +21,10 @@ class Reward extends Model
             ->groupBy('reward_provider_id', 'value')
             ->get();
 
-        return $this->formatStockReportForTable($rawData);
+        return static::formatStockReportForTable($rawData);
     }
 
-    private function formatStockReportForTable($rawData)
+    private static function formatStockReportForTable($rawData)
     {
         $tableData = [
             'totals' => [
