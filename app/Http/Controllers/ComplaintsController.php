@@ -99,7 +99,7 @@ class ComplaintsController extends Controller
     {
         if (is_numeric($searchData)) {
             $searchField = 'account_number';
-        } elseif (filter_var($search, FILTER_VALIDATE_EMAIL)) {
+        } elseif (filter_var($searchData, FILTER_VALIDATE_EMAIL)) {
             $searchField = 'email';
         }
 
