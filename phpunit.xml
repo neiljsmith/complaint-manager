@@ -29,6 +29,11 @@
         <env name="QUEUE_DRIVER" value="sync"/>
         <env name="MAIL_DRIVER" value="array"/>
         <env name="DB_CONNECTION" value="mysql_testing"/> <!-- the DB connection settings in config used by PHPUnit -->
-
-    </php>
+    </php>    
+    <logging>
+        <log type="coverage-html" target="./build/coverage" title="Complaint Manager coverage report" charset="UTF-8" yui="true" highlight="true"/>
+        <log type="coverage-clover" target="./build/logs/clover.xml"/>
+        <log type="junit" target="./build/logs/junit.xml"/>
+        <log type="testdox-html" target=".build/logstestdox.html"/>
+    </logging>
 </phpunit>

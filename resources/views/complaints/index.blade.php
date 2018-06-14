@@ -7,7 +7,8 @@
         </div>
         <div class="col-md-5">
             <div class="form-group">
-                <input type="text" class="form-control" data-customer-search placeholder="Search customer account no. or email">
+                <input type="text" class="form-control dropdown" data-customer-search data-toggle="dropdown" placeholder="Search customer account no. or email">
+                <div class="dropdown-menu d-none" data-customer-search-suggest></div>
             </div>
         </div>
     </div>

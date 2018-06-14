@@ -15,6 +15,60 @@ class ComplaintTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function testFindMatchingEmailOrAccountNo()
+    {
+        // At least one user required to create customers
+        factory(User::class)->create([
+            'line_manager_user_id' => 1,
+        ]);
+
+        $customersData = [
+            ['account_number' => 11111111, 'email' => 'aaaaa@example.net'],
+            ['account_number' => 11111112, 'email' => 'aaaab@example.net'],
+            ['account_number' => 11111113, 'email' => 'aaaac@example.net'],
+            ['account_number' => 11211114, 'email' => 'aaaad@example.net'],
+            ['account_number' => 11211115, 'email' => 'aabae@example.net'],
+            ['account_number' => 11211116, 'email' => 'aabaaf@example.net'],
+            ['account_number' => 11311117, 'email' => 'aacag@example.net'],
+            ['account_number' => 11411118, 'email' => 'aadah@example.net'],
+            ['account_number' => 11511119, 'email' => 'aaeai@example.net'],
+            ['account_number' => 11611120, 'email' => 'aafaj@example.net'],
+            ['account_number' => 11711121, 'email' => 'aagak@example.net'],
+            ['account_number' => 11811122, 'email' => 'aahal@example.net'],
+            ['account_number' => 11911123, 'email' => 'aaiam@example.net'],
+            ['account_number' => 12011124, 'email' => 'aajan@example.net'],
+            ['account_number' => 12111125, 'email' => 'baaao@example.net'],
+        ];
+        $customers = [];
+        foreach ($customersData as $customerData) {
+            $customers[] = factory(Customer::class)->create($customerData);
+            
+        }
+
+        foreach ($customers as $customer) {
+            factory(Complaint::class)->create(['user_id' => 1, 'customer_id' => $customer->id]);
+        }
+
+        $searchResult = Customer::findMatchingEmailOrAccountNo('aaa');        
+        $this->assertEquals(4, $searchResult->count());
+
+        $searchResult = Customer::findMatchingEmailOrAccountNo('baa');        
+        $this->assertEquals(1, $searchResult->count());
+
+        $searchResult = Customer::findMatchingEmailOrAccountNo('baz');        
+        $this->assertEquals(0, $searchResult->count());
+
+        $searchResult = Customer::findMatchingEmailOrAccountNo('111');        
+        $this->assertEquals(3, $searchResult->count());
+
+        $searchResult = Customer::findMatchingEmailOrAccountNo('113');        
+        $this->assertEquals(1, $searchResult->count());
+
+        $searchResult = Customer::findMatchingEmailOrAccountNo('999');        
+        $this->assertEquals(0, $searchResult->count());
+
+    }
+
     public function testFindWithDetails()
     {
         $user = factory(User::class)->create(['line_manager_user_id' => 0]);

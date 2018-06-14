@@ -118,7 +118,6 @@ class Validator {
                 const promise = new Promise((resolve, reject) => {
                     axios.get('/users/num-super-admins')
                         .then(response => {
-                            console.log(response.data);
                             result = response.data <= minNumSuperAdmins ? false : true;
                             resolve(result);
                         }).catch(error => {

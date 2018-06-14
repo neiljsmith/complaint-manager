@@ -92,22 +92,14 @@ class ComplaintsController extends Controller
      * Returns data to AJAX call from user search form,
      * looking for either user's 'account_number' or 'email'
      *
-     * @param string $searchData
-     * @return void
+     * @param string $searchString
+     * @return Customer[]
      */
-    public function findByCustomerAccOrEmail($searchData)
+    public function findByCustomerAccOrEmail($searchString)
     {
-        if (is_numeric($searchData)) {
-            $searchField = 'account_number';
-        } elseif (filter_var($searchData, FILTER_VALIDATE_EMAIL)) {
-            $searchField = 'email';
-        }
-
-        if (isset($searchField)) {
-            return Customer::findBySearchTerm($searchField, $searchData);
-        }
+        return Customer::findMatchingEmailOrAccountNo($searchString);
     }   
-    
+
     /**
      * Responds to AJAX call from complaint detail page
      * to add a note to the complaint.

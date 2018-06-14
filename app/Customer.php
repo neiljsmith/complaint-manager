@@ -9,24 +9,30 @@ class Customer extends Model
     /**
      * Finds a customer and their complaints with reward data from search criteria
      *
-     * @param string $searchField
-     * @param string $searchData
-     * @return Customer
+     * @param string $searchString
+     * @return Customer[]
      */
-    public static function findBySearchTerm($searchField, $searchData)
+    public static function findMatchingEmailOrAccountNo($searchString)
     {
-        $customer = static::with(['complaints' => function($query) {
-            $query->with('reward')->orderBy('created_at', 'desc');
-        }])->where($searchField, $searchData)->first();
+        $resultLimit = 10;
+        
+        $customers = static::with(['complaints' => function($query) {
+            $query->with('reward')
+            ->orderBy('created_at', 'desc');
+        }])->where('email', 'like', $searchString . '%')
+            ->orWhere('account_number', 'like', $searchString . '%')
+            ->limit($resultLimit)
+            ->get();
 
-        if ($customer) {
+        // Additional/modified complaint data for display
+        foreach ($customers as $customer) {
             foreach ($customer->complaints as $complaint) {
                 $complaint->created_at_diff = $complaint->created_at->diffForHumans();
                 $complaint->description = substr($complaint->description, 0, 50) . '...';
             }
+        }
 
-            return $customer;
-        }    
+        return $customers;
     }
 
     public function complaints()
