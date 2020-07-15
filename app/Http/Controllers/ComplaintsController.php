@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Customer;
 use App\Complaint;
 use App\ComplaintNote;
-use Illuminate\Http\Request;
 use App\RewardProvider;
 use App\Reward;
+use Illuminate\Http\Request;
 
 class ComplaintsController extends Controller
 {
