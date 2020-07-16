@@ -17,7 +17,9 @@
             <td>{{ $user->email }}</td>
             <td>{{ $user->roles[0]->name }}</td>
             <td class="text-center"><i class="fas fa-{{ $user->active ? 'check' : 'times' }}"></i></td>
-            <td><a href="/users/{{ $user->id }}/edit" class="btn btn-primary btn-sm">Edit</a></td>
+            <td>
+                <a href="{{ route('users.edit', ['user' => $user]) }}" class="btn btn-primary btn-sm">Edit</a>
+            </td>
         </tr>
         @endforeach
     </tbody>

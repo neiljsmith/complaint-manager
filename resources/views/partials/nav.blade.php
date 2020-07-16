@@ -9,20 +9,20 @@
             @auth
 
             <li class="nav-item">
-                <a class="nav-link" href="/">Home</a>
+            <a class="nav-link" href="{{ route('home') }}">Home</a>
             </li>
 
                 @if (\Auth::user()->hasRole([App\Role::ROLE_SUPER_ADMIN]))
 
             <li class="nav-item">
-                <a class="nav-link" href="/reports">Reports</a>
+                <a class="nav-link" href="{{ route('reports') }}">Reports</a>
             </li>
 
                 @endif
 
                 @if (\Auth::user()->hasRole([App\Role::ROLE_SUPER_ADMIN, App\Role::ROLE_LINE_MANAGER]))
             <li class="nav-item">
-                <a class="nav-link" href="/users">Users</a>
+                <a class="nav-link" href="{{ route('users.index') }}">Users</a>
             </li>
 
                 @endif
@@ -30,7 +30,7 @@
             @else
 
             <li class="nav-item">
-                <a class="nav-link" href="/login">Login</a>
+                <a class="nav-link" href="{{ route('login') }}">Login</a>
             </li>
 
             @endauth
@@ -44,7 +44,7 @@
                 </a>
 
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a href="/users/{{ Auth::user()->id }}/edit" class="dropdown-item">My Details</a>
+                    <a href="{{ route('users.edit', ['user' => Auth::user()]) }}" class="dropdown-item">My Details</a>
                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}

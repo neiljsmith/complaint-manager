@@ -6,7 +6,7 @@
             <h1>Users</h1>
         </div>
         <div class="col-md-4">
-            <a href="/users/create" class="btn btn-primary float-right">Create New User</a>
+            <a href="{{ route('users.create') }}" class="btn btn-primary float-right">Create New User</a>
         </div>
         </div>
     <div class="row justify-content-center">

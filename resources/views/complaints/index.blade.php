@@ -1,4 +1,4 @@
-@extends('layouts.app') 
+@extends('layouts.app')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -56,7 +56,9 @@
                         <td>{{ $complaint->customer->first_name . ' ' . $complaint->customer->last_name }}</td>
                         <td>{{ $complaint->created_at }}</td>
                         <td class="text-center"><i class="fas fa-{{ $complaint->reward ? 'check' : 'times' }}"></i></td>
-                        <td><a href="/complaints/{{ $complaint->id }}" class="btn btn-primary btn-sm">Show</a></td>
+                        <td>
+                            <a href="{{ route('complaint-show', ['complaint' => $complaint->id]) }}" class="btn btn-primary btn-sm">Show</a>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
