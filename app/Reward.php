@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Reward extends Model
@@ -14,7 +15,7 @@ class Reward extends Model
      */
     public static function stockReport()
     {
-        $rawData = \DB::table('rewards')
+        $rawData = DB::table('rewards')
             ->selectRaw('COUNT(*) count, reward_providers.name, SUM(value) total_value, value')
             ->leftJoin('reward_providers', 'rewards.reward_provider_id', '=', 'reward_providers.id')
             ->whereNull('complaint_id')

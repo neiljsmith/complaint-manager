@@ -1,6 +1,6 @@
-# Demo Laravel 5.6 Application
+# Demo Laravel 7 Application
 
-This is a sample application designed to demonstrate knowledge of Laravel 5 and many of its features plus employment of front-end development techniques.
+This is a sample application designed to demonstrate knowledge of Laravel and many of its features plus employment of front-end development techniques.
 
 A working deployment of this application can be found at http://laravel-demo.neilsmith.com, hosted on my own virtual private server. Login can be supplied on request.
 

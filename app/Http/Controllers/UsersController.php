@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Role;
 use App\User;
 use App\Mail\Welcome;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserCreateUpdate;
 use Illuminate\Support\Facades\Password;
@@ -117,8 +118,8 @@ class UsersController extends Controller
             'last_name' => $request->input('last_name'),
             'email' => $request->input('email'),
             'line_manager_user_id' => $request->input('line_manager_user_id'),
-            'password' => \Hash::make(str_random(35)),
-            'remember_token' => str_random(10),
+            'password' => \Hash::make(Str::random(35)),
+            'remember_token' => Str::random(10),
         ]);
         $user->roles()->attach($request->input('role_id'));
 

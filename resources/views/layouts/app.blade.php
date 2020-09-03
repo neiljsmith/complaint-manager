@@ -43,7 +43,9 @@
     </button>
   </div>
   @endif
-  @include('partials.nav') @yield('content')
+  
+  @include('partials.nav') 
+  @yield('content')
 </body>
 
 </html>

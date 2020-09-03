@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Reward;
 use App\Customer;
 use App\Complaint;
 use App\ComplaintNote;
 use App\RewardProvider;
-use App\Reward;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ComplaintsController extends Controller
 {
@@ -58,7 +59,7 @@ class ComplaintsController extends Controller
         ]);
 
         $complaint = Complaint::create([
-            'user_id' => \Auth::id(),
+            'user_id' => Auth::id(),
             'customer_id' => $customer->id,
             'description' => $request->description,
         ]);
@@ -113,7 +114,7 @@ class ComplaintsController extends Controller
         $request->validate(['content' => 'required|min:2']);
         $complaintNote = new ComplaintNote([
             'content' => $request->content,
-            'user_id' => \Auth::id(),
+            'user_id' => Auth::id(),
         ]);
         $complaint->complaintNotes()->save($complaintNote);
 

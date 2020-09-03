@@ -1,3 +1,6 @@
+<?php
+use Illuminate\Support\Facades\Auth;
+?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand" href="http://www.neilsmith.com">neilsmith.com</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,7 +15,7 @@
             <a class="nav-link" href="{{ route('home') }}">Home</a>
             </li>
 
-                @if (\Auth::user()->hasRole([App\Role::ROLE_SUPER_ADMIN]))
+                @if (Auth::user()->hasRole([App\Role::ROLE_SUPER_ADMIN]))
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('reports') }}">Reports</a>
@@ -20,7 +23,7 @@
 
                 @endif
 
-                @if (\Auth::user()->hasRole([App\Role::ROLE_SUPER_ADMIN, App\Role::ROLE_LINE_MANAGER]))
+                @if (Auth::user()->hasRole([App\Role::ROLE_SUPER_ADMIN, App\Role::ROLE_LINE_MANAGER]))
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('users.index') }}">Users</a>
             </li>
