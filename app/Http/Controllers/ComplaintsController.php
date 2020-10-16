@@ -112,11 +112,11 @@ class ComplaintsController extends Controller
     public function addNote(Request $request, Complaint $complaint)
     {
         $request->validate(['content' => 'required|min:2']);
-        $complaintNote = new ComplaintNote([
+
+        $complaint->complaintNotes()->save(ComplaintNote::make([
             'content' => $request->content,
             'user_id' => Auth::id(),
-        ]);
-        $complaint->complaintNotes()->save($complaintNote);
+        ]));
 
         return back()->with('status', 'Comment added!');
     }
